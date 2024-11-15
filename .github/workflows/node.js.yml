@@ -22,10 +22,11 @@ jobs:
         env:
             DB_URI_TEST: ${{ secrets.DB_HOST_TEST  }}
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK  }}
-        run: npm test && echo "things=$(grep 'FAIL' test-output.log | wc -l)" >> $GITHUB_ENV
+        run: npm test && echo ::set-output name=things::$(grep "FAIL" test-output.log | wc -l)
+        id: counter
         shell: bash 
       - name: Review test
-        if:  env.things != '0'
+        if:  steps.counter.outputs.things != '0'
         run: exit 1
   deploy:
     runs-on: ubuntu-latest
