@@ -15,7 +15,7 @@ const swaggerDefinition = {
       url: 'http://localhost:3001/api',
     },
     {
-      url: 'https://afternoon-journey-32165.herokuapp.com/api',
+      url: 'https://hidden-wildwood-32702-8a2223ea78b0.herokuapp.com/api',
     },
   ],
   components: {
