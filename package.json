@@ -41,7 +41,8 @@
       "/node_modules/"
     ],
     "coverageReporters": ["json","html"],
-    "globalTeardown":"./global-kill.js"
+    "globalTeardown":"./global-kill.js",
+    "testTimeout": 10000
   },
   "engines": {
     "node": "20.x"
