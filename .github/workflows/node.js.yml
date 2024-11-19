@@ -22,7 +22,17 @@ jobs:
         env:
             DB_URI_TEST: ${{ secrets.DB_URI_TEST  }}
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK  }}
-        run: npm test && echo ::set-output name=things::$(grep "FAIL" test-output.log | wc -l)
+        run: |
+          npm test || echo "Tests failed"
+          # Mostrar los logs para diagnóstico
+          if [ -f test-output.log ]; then
+            echo "Test logs:"
+            cat test-output.log
+          else
+            echo "No se encontró test-output.log"
+          fi
+          # Contar los errores y establecer la salida
+          echo ::set-output name=things::$(grep "FAIL" test-output.log | wc -l)
         id: counter
         shell: bash 
       - name: Revisar test
